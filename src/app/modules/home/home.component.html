@@ -4,7 +4,57 @@
 
       <!-- Login-->
       <form action="">
-        p-card
+        <p-card styleClass="mt-10" header="Login" subHeader="Faça login com sua conta existente"
+          *ngIf="loginCard"
+        >
+          <div class="flex justify-content-center align-content-center text-align-center">
+            <input type="email" pInputText placeholder="Email">
+          </div>
+          <div class=" mt-3 flex justify-content-center align-content-center text-align-center">
+            <input type="password" pInputText placeholder="Senha">
+          </div>
+
+          <div class="flex justify-content-center align-content-center text-align-center mt-3">
+            <button type="submit" pButton pRipple label="Login"></button>
+          </div>
+
+          <span
+          style="cursor: pointer;"
+          class="flex justify-content-center align-content-center text-align-center mt-3 text-red-600 font-semibold"
+          (click)="loginCard = !loginCard"
+          >
+            Criar Conta
+          </span>
+        </p-card>
+      </form>
+
+      <!-- Sing up -->
+      <form action="">
+        <p-card styleClass="mt-10" header="Criar Conta" subHeader="Crie sua conta gratuitamente"
+          *ngIf="!loginCard"
+        >
+          <div class="flex justify-content-center align-content-center text-align-center">
+            <input type="text" pInputText placeholder="Nome">
+          </div>
+          <div class="flex justify-content-center align-content-center text-align-center">
+            <input type="email" pInputText placeholder="Email">
+          </div>
+          <div class=" mt-3 flex justify-content-center align-content-center text-align-center">
+            <input type="password" pInputText placeholder="Senha">
+          </div>
+
+          <div class="flex justify-content-center align-content-center text-align-center mt-3">
+            <button type="submit" pButton pRipple label="Criar conta"></button>
+          </div>
+
+          <span
+          style="cursor: pointer;"
+          class="flex justify-content-center align-content-center text-align-center mt-3 text-red-600 font-semibold"
+          (click)="loginCard = !loginCard"
+          >
+            Fazer login
+          </span>
+        </p-card>
       </form>
     </div>
   </div>
