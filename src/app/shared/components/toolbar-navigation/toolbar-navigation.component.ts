@@ -1,4 +1,6 @@
+import { CookieService } from 'ngx-cookie-service';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar-navigation',
@@ -7,4 +9,13 @@ import { Component } from '@angular/core';
 })
 export class ToolbarNavigationComponent {
 
+  constructor(
+    private CookieService: CookieService,
+    private router: Router
+  ) { }
+
+  logout(): void {
+    this.CookieService.delete('token');
+    this.router.navigate(['/home']);
+  }
 }

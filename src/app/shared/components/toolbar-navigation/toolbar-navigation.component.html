@@ -19,7 +19,7 @@
       ></p-button>
       <p-button
       icon="pi pi-ticket"
-      label="Produtos"
+      label="Categorias"
       routerLink="/categories"
       styleClass="bg-indigo-800 p-button-secondary"
       routerLinkActive="exact_route"
@@ -32,5 +32,15 @@
       styleClass="bg-indigo-800 p-button-secondary"
       routerLinkActive="exact_route"
       ></p-button>
+  </div>
+
+  <div class="p-toolbar-group-end">
+    <p-button
+    label="Sair"
+    styleClass="bg-indigo-800 p-button-secondary"
+    icon="pi pi-sign-out"
+    styleClass="p-button-danger"
+    (onClick)="logout()"
+    ></p-button>
   </div>
 </p-toolbar>
