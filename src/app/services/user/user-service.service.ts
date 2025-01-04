@@ -3,10 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-import { AuthRequest } from 'src/app/models/interfaces/auth/AuthRequest';
-import { AuthResponse } from 'src/app/models/interfaces/auth/AuthResponse';
-import { SignUpUserResponse } from 'src/app/models/interfaces/SignUpUserResponse';
-import { SignUpUserResquest } from 'src/app/models/interfaces/SignUpUserResquest';
+import { AuthRequest } from 'src/app/models/interfaces/user/auth/AuthRequest';
+import { AuthResponse } from 'src/app/models/interfaces/user/auth/AuthResponse';
+import { SignUpUserResponse } from 'src/app/models/interfaces/user/SignUpUserResponse';
+import { SignUpUserResquest } from 'src/app/models/interfaces/user/SignUpUserResquest';
 
 @Injectable({
   providedIn: 'root'

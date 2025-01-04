@@ -4,9 +4,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
-import { AuthRequest } from 'src/app/models/interfaces/auth/AuthRequest';
-import { SignUpUserResponse } from 'src/app/models/interfaces/SignUpUserResponse';
-import { SignUpUserResquest } from 'src/app/models/interfaces/SignUpUserResquest';
+import { AuthRequest } from 'src/app/models/interfaces/user/auth/AuthRequest';
+import { SignUpUserResponse } from 'src/app/models/interfaces/user/SignUpUserResponse';
+import { SignUpUserResquest } from 'src/app/models/interfaces/user/SignUpUserResquest';
 import { UserService} from 'src/app/services/user/user-service.service';
 
 @Component({
