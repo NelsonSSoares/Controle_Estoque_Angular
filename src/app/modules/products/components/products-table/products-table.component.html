@@ -94,7 +94,7 @@
         <th p pSortableColumn="category.name">
           <div class="flex justify-content-between align-items-center">
             <div class="flex justify-content-between align-items-center">
-              Descrição
+              Categoria
             </div>
             <p-sortIcon field="category.name"></p-sortIcon>
             <p-columnFilter
@@ -118,6 +118,7 @@
             label="Adicionar"
             pTooltip="Adicionar produto"
             tooltipPosition="top"
+            (onClick)="handleProductEvent(addProductEvent)"
             ></p-button>
           </div>
         </th>
@@ -143,6 +144,7 @@
             class="p-button-rounded p-button-warning"
             pTooltip="Editar produto"
             tooltipPosition="top"
+            (click)="handleProductEvent(editProductEvent ,product?.id)"
             ></button>
 
             <button
