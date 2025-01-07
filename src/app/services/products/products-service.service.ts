@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/app/environments/environment';
 import { GetAllProductsResponse } from 'src/app/models/interfaces/products/response/GetAllProductsResponse';
 import { map, Observable } from 'rxjs';
+import { DeleteProductResponse } from 'src/app/models/interfaces/products/response/DeleteProductResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,15 @@ export class ProductsServiceService {
       .pipe(
         map((products) => products.filter((product) => product?.amount > 0))
       );
+  }
+
+  deleteProduct(product_id: string): Observable<DeleteProductResponse> {
+    return this.http.delete<DeleteProductResponse>(
+      `${this.API_URL}/product/delete`,{
+        ...this.httpOptions, params: {product_id: product_id}
+      }
+
+    );
   }
 
 }
