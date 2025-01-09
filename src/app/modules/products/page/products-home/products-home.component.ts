@@ -1,3 +1,4 @@
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -6,6 +7,7 @@ import { EventAction } from 'src/app/models/interfaces/products/event/EventActio
 import { GetAllProductsResponse } from 'src/app/models/interfaces/products/response/GetAllProductsResponse';
 import { ProductsServiceService } from 'src/app/services/products/products-service.service';
 import { ProductsDataTransferService } from 'src/app/shared/services/products-data-transfer.service';
+import { ProductFormComponent } from '../../components/product-form/product-form.component';
 
 @Component({
   selector: 'app-products-home',
@@ -15,6 +17,7 @@ import { ProductsDataTransferService } from 'src/app/shared/services/products-da
 export class ProductsHomeComponent implements OnDestroy {
 
   private readonly destroy$: Subject<void> = new Subject();
+  private ref! : DynamicDialogRef;
   public productsDatas: Array<GetAllProductsResponse> = [];
 
   constructor(
@@ -22,7 +25,8 @@ export class ProductsHomeComponent implements OnDestroy {
     private productsDtService: ProductsDataTransferService,
     private router: Router,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private dialogService: DialogService,
   ) { }
 
 
@@ -53,20 +57,35 @@ export class ProductsHomeComponent implements OnDestroy {
         },
         error: (error) => {
           console.error(error);
-          this.router.navigate(['/dashboard']);
           this.messageService.add({
             severity: 'error',
             summary: 'Erro ao buscar produtos',
             detail: 'Tente novamente mais tarde',
             life: 2000
           });
+          this.router.navigate(['/dashboard']);
         }
       });
   }
 
   handleProductAction(event: EventAction): void{
-    console.log('Dados do Evento Recebido', event);
-
+    if(event){
+      this.ref = this.dialogService.open(ProductFormComponent, {
+        header: event?.action,
+        width: '70%',
+        contentStyle: {overflow: 'auto'},
+        baseZIndex: 10000,
+        maximizable: true,
+        data: {
+          event: event,
+          productsDatas: this.productsDatas
+        }
+      });
+      this.ref.onClose.pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => this.getApiProductsData(),
+      });
+    }
 
   }
 

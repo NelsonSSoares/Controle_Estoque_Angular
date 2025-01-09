@@ -5,6 +5,8 @@ import { environment } from 'src/app/environments/environment';
 import { GetAllProductsResponse } from 'src/app/models/interfaces/products/response/GetAllProductsResponse';
 import { map, Observable } from 'rxjs';
 import { DeleteProductResponse } from 'src/app/models/interfaces/products/response/DeleteProductResponse';
+import { CreateProductRequest } from 'stock-api/src/models/interfaces/product/CreateProductRequest';
+import { CreateProductResponse } from 'src/app/models/interfaces/products/response/CreateProductResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +41,12 @@ export class ProductsServiceService {
         ...this.httpOptions, params: {product_id: product_id}
       }
 
+    );
+  }
+
+  createProduct(requestDatas: CreateProductRequest): Observable<CreateProductResponse> {
+    return this.http.post<CreateProductResponse>(
+      `${this.API_URL}/product/create`, requestDatas, this.httpOptions
     );
   }
 
