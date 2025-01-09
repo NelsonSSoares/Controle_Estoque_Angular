@@ -23,7 +23,7 @@ export class ProductFormComponent implements OnInit , OnDestroy {
     name: ['', Validators.required],
     description: ['', Validators.required],
     price: ['', Validators.required],
-    category_id: ['', Validators.required],
+    category_id: ['',  Validators.required ],
     amount: [0, Validators.required]
   });
 

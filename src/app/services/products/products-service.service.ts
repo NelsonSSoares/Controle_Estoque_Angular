@@ -46,7 +46,7 @@ export class ProductsServiceService {
 
   createProduct(requestDatas: CreateProductRequest): Observable<CreateProductResponse> {
     return this.http.post<CreateProductResponse>(
-      `${this.API_URL}/product/create`, requestDatas, this.httpOptions
+      `${this.API_URL}/product`, requestDatas, this.httpOptions
     );
   }
 
