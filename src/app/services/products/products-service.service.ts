@@ -7,6 +7,7 @@ import { map, Observable } from 'rxjs';
 import { DeleteProductResponse } from 'src/app/models/interfaces/products/response/DeleteProductResponse';
 import { CreateProductRequest } from 'stock-api/src/models/interfaces/product/CreateProductRequest';
 import { CreateProductResponse } from 'src/app/models/interfaces/products/response/CreateProductResponse';
+import { EditProductRequest } from 'stock-api/src/models/interfaces/product/EditProductRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -49,5 +50,13 @@ export class ProductsServiceService {
       `${this.API_URL}/product`, requestDatas, this.httpOptions
     );
   }
+
+  editProduct(requestDatas: EditProductRequest): Observable<void>{
+    return this.http.put<void>(
+      `${this.API_URL}/product`, requestDatas, this.httpOptions
+    );
+
+  }
+
 
 }
