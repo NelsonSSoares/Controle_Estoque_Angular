@@ -24,7 +24,7 @@ constructor(
   private CookieService: CookieService
 ) { }
 
-  getAllCatories(): Observable<GetCategoriesResponse> {
+  getAllCategories(): Observable<GetCategoriesResponse> {
     return this.httpClient.get<GetCategoriesResponse>
     (`${this.API_URL}/categories`, this.httpOtions);
   }

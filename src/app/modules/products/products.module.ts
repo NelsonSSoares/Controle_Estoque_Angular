@@ -21,12 +21,15 @@ import { ProductsHomeComponent } from './page/products-home/products-home.compon
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PRODUCTS_ROUTES } from './products.routing';
 import { ProductsTableComponent } from './components/products-table/products-table.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { ProductFormComponent } from './components/product-form/product-form.component';
 
 
 @NgModule({
   declarations: [
     ProductsHomeComponent,
-    ProductsTableComponent
+    ProductsTableComponent,
+    ProductFormComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +50,8 @@ import { ProductsTableComponent } from './components/products-table/products-tab
     InputNumberModule,
     DynamicDialogModule,
     ConfirmDialogModule,
-    TooltipModule
+    TooltipModule,
+    DropdownModule
   ],
   providers: [
     DialogService, ConfirmationService
