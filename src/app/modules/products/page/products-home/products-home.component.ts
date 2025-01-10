@@ -1,20 +1,22 @@
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Component, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { Subject, takeUntil } from 'rxjs';
-import { EventAction } from 'src/app/models/interfaces/products/event/EventAction';
-import { GetAllProductsResponse } from 'src/app/models/interfaces/products/response/GetAllProductsResponse';
-import { ProductsServiceService } from 'src/app/services/products/products-service.service';
-import { ProductsDataTransferService } from 'src/app/shared/services/products-data-transfer.service';
-import { ProductFormComponent } from '../../components/product-form/product-form.component';
+import { OnDestroy, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { ConfirmationService, MessageService } from "primeng/api";
+import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
+import { Subject, takeUntil } from "rxjs";
+import { GetAllProductsResponse } from "src/app/models/interfaces/products/response/GetAllProductsResponse";
+import { ProductsServiceService } from "src/app/services/products/products-service.service";
+import { ProductsDataTransferService } from "src/app/shared/services/products-data-transfer.service";
+import { ProductFormComponent } from "../../components/product-form/product-form.component";
+import { EventAction } from "src/app/models/interfaces/products/event/EventAction";
+
+import { Component } from "@angular/core";
 
 @Component({
   selector: 'app-products-home',
   templateUrl: './products-home.component.html',
   styleUrls: []
 })
-export class ProductsHomeComponent implements OnDestroy {
+export class ProductsHomeComponent implements OnInit, OnDestroy {
 
   private readonly destroy$: Subject<void> = new Subject();
   private ref! : DynamicDialogRef;
