@@ -23,7 +23,6 @@ export class ProductFormComponent implements OnInit , OnDestroy {
 
 
   private readonly destroy$: Subject<void> = new Subject();
-  private ref! : DynamicDialogConfig;
 
   public selectedCategory: Array<{name: string, code: string}> = [];
   public categoriesDatas: Array<GetCategoriesResponse>  = [];
@@ -60,7 +59,8 @@ export class ProductFormComponent implements OnInit , OnDestroy {
     private messageService: MessageService,
     private productService: ProductsServiceService,
     private router: Router,
-    private productsDtService: ProductsDataTransferService
+    private productsDtService: ProductsDataTransferService,
+    private ref: DynamicDialogConfig
   ) { }
 
 
