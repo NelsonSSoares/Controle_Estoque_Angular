@@ -19,6 +19,7 @@ import { EditProductRequest } from 'stock-api/src/models/interfaces/product/Edit
   templateUrl: './product-form.component.html',
   styleUrls: []
 })
+
 export class ProductFormComponent implements OnInit , OnDestroy {
 
 
@@ -28,6 +29,7 @@ export class ProductFormComponent implements OnInit , OnDestroy {
   public categoriesDatas: Array<GetCategoriesResponse>  = [];
   public productDatas: Array<GetAllProductsResponse> = [];
   public productSelectedDatas!: GetAllProductsResponse;
+  public renderDropdown = false;
 
   public addProductAction = ProductEvent.ADD_PRODUCT_EVENT;
   public editProductAction = ProductEvent.EDIT_PRODUCT_EVENT;
@@ -49,7 +51,8 @@ export class ProductFormComponent implements OnInit , OnDestroy {
     name: ['', Validators.required],
     description: ['', Validators.required],
     price: ['', Validators.required],
-    amount: [0, Validators.required]
+    amount: [0, Validators.required],
+    category_id: ['', Validators.required]
   });
 
 
@@ -66,12 +69,12 @@ export class ProductFormComponent implements OnInit , OnDestroy {
 
   ngOnInit(): void {
     this.productAction = this.ref.data;
-    if(this.productAction.event.action === this.editProductAction && this.productAction.productDatas){
-      this.getProductSelectedDatas(this.productAction?.event?.id as string);
-    }
-    this.productAction.event.action === this.saleProductAction && this.getProductDatas(this.productAction?.event?.id as string);
+
+    this.productAction.event.action === this.saleProductAction &&
+    this.getProductDatas(this.productAction?.event?.id as string);
 
     this.getAllCategories();
+    this.renderDropdown = true;
   }
 
 
@@ -80,13 +83,10 @@ export class ProductFormComponent implements OnInit , OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
+          if(this.productAction.event.action === this.editProductAction && this.productAction.productDatas){
+            this.getProductSelectedDatas(this.productAction?.event?.id as string);
+          }
           this.categoriesDatas = Array.isArray(response) ? response : [];
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Categorias carregadas',
-            detail: 'Categorias carregadas com sucesso',
-            life: 2000
-          });
         }
       });
   }
@@ -183,7 +183,8 @@ export class ProductFormComponent implements OnInit , OnDestroy {
           name: this.productSelectedDatas?.name,
           description: this.productSelectedDatas?.description,
           price: this.productSelectedDatas?.price,
-          amount: this.productSelectedDatas?.amount
+          amount: this.productSelectedDatas?.amount,
+          category_id: this.productSelectedDatas?.category?.id
         });
       }
     }
