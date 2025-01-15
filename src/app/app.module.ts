@@ -13,14 +13,13 @@ import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
-import { CategoriesComponent } from './modules/categories/categories.component';
-
+import { CategoriesHomeComponent } from './modules/categories/page/categories-home/categories-home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    CategoriesComponent,
+    CategoriesHomeComponent,
   ],
   imports: [
     BrowserModule,
