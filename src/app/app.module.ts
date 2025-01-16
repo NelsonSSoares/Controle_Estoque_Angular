@@ -19,7 +19,7 @@ import { CategoriesHomeComponent } from './modules/categories/page/categories-ho
   declarations: [
     AppComponent,
     HomeComponent,
-    CategoriesHomeComponent,
+
   ],
   imports: [
     BrowserModule,

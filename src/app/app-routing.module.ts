@@ -26,7 +26,15 @@ const routes: Routes = [
       import('./modules/products/products.module') //lazy loading carrega o modulo somente quando a rota é acessada
     .then(m => m.ProductsModule),
     canActivate: [AuthGuardService]
-  }
+  },
+  {
+    path: 'categories',
+    loadChildren: () =>
+      import('./modules/categories/categories.module')
+    .then(m => m.CategoriesModule),
+    canActivate: [AuthGuardService]
+  },
+
 ];
 
 @NgModule({
