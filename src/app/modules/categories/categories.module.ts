@@ -21,6 +21,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TooltipModule } from 'primeng/tooltip';
 import { ConfirmationService } from 'primeng/api';
 import { CategoriesTableComponent } from './components/categories-table/categories-table.component';
+import { CategoryFormComponent } from './components/category-form/category-form.component';
 
 
 
@@ -28,6 +29,7 @@ import { CategoriesTableComponent } from './components/categories-table/categori
   declarations: [
     CategoriesHomeComponent,
     CategoriesTableComponent,
+    CategoryFormComponent,
   ],
   imports: [
     CommonModule,

@@ -1,3 +1,4 @@
+import { DeleteCategoryAction } from './../../../../models/interfaces/categories/event/DeleteCategoryAction';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CategoriesService } from './../../../../services/categories/categories.service';
@@ -21,7 +22,7 @@ export class CategoriesHomeComponent implements OnInit, OnDestroy {
     private categoriesService: CategoriesService,
     private dialogService: DialogService,
     private messageService: MessageService,
-    private confirmationioService: ConfirmationService,
+    private confirmationService: ConfirmationService,
     private router: Router
   ) { }
 
@@ -55,7 +56,49 @@ export class CategoriesHomeComponent implements OnInit, OnDestroy {
       );
   }
 
+  handleDeleteCategoryAction(event: DeleteCategoryAction): void{
+    if(event){
+      this.confirmationService.confirm({
+        message: `Deseja realmente excluir a categoria ${event.categoryName}?`,
+        header: 'Confirmação',
+        icon: 'pi pi-exclamation-triangle',
+        acceptLabel: 'Sim',
+        rejectLabel: 'Não',
+        accept: () => this.deleteCategory(event.category_id)
+      })
+    }
+  }
 
+
+  deleteCategory(category_id: string) {
+    if(category_id){
+      this.categoriesService.deleteCategory({category_id})
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Sucesso',
+              detail: 'Categoria excluída com sucesso',
+              life: 2000
+            });
+            this.getAllCategories();
+          }
+        },
+        error: (error) => {
+          console.error('Error deleting category', error);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Erro ao excluir categoria',
+            life: 2000
+          });
+          this.getAllCategories();
+        }
+      })
+    }
+  }
 
 
   ngOnDestroy(): void {

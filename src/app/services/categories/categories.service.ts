@@ -29,4 +29,20 @@ constructor(
     (`${this.API_URL}/categories`, this.httpOtions);
   }
 
+  createNewCategory(requestData: {name: string}): Observable<Array<GetCategoriesResponse>> {
+    return this.httpClient.post<Array<GetCategoriesResponse>>
+    (`${this.API_URL}/category`, requestData, this.httpOtions);
+
+  }
+
+  deleteCategory(requestData:{category_id: string} ): Observable<void> {
+    return this.httpClient.delete<void>
+    (`${this.API_URL}/category/delete`, {
+      ...this.httpOtions,
+      params:{
+        category_id: requestData?.category_id
+      }
+    });
+  }
+
 }
