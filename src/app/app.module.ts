@@ -12,8 +12,6 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { CookieService } from 'ngx-cookie-service';
-import { MessageService } from 'primeng/api';
-import { CategoriesHomeComponent } from './modules/categories/page/categories-home/categories-home.component';
 
 @NgModule({
   declarations: [

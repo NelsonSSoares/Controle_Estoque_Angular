@@ -21,7 +21,7 @@ export class ProductsTableComponent {
 
   constructor(
 
-  ) { }
+  ) {}
 
   public handleProductEvent(action: string, id?: string): void {
     if(action && action != ''){
@@ -39,3 +39,5 @@ export class ProductsTableComponent {
     }
   }
 }
+
+
