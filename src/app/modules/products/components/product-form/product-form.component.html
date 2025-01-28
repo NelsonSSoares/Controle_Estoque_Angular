@@ -66,30 +66,32 @@
   </form>
 </div>
 
-<!--
-  codigo profs
-<div *ngIf="productAction?.event?.action === editProductAction">
-  <form [formGroup]="editProductForm" (ngSubmit)="handleSubmitEditProduct()">
-    <div class="card flex flex-column md:flex-column gap-3">
-      <input pInputText placeholder="Nome" formControlName="name" />
-      <input pInputText placeholder="Preço" formControlName="price" />
-      <input pInputText placeholder="Descrição" formControlName="description" />
-      <input
-        pInputText
-        type="number"
-        placeholder="Quantidade"
-        formControlName="amount"
-      />
-
-      <div
-        class="flex flex-row justify-content-center align-content-center align-items-center"
+<div *ngIf="productAction?.event?.action == saleProductAction">
+  <form [formGroup]="saleProductForm" (ngSubmit)="handleSubmitSaleProduct()">
+    <div class="card flex flex-column md-flex-column gap-3">
+      <input pInputText placeholder="Nome" formControlName="name">
+      <p-dropdown
+      styleClass="w-full"
+      [options]="productDatas"
+      [(ngModel)]= "saleProductSelected"
+      optionalLabel="name"
+      optionValue="id"
+      placeholder="Selecione um produto"
+      formControlName="product_id"
       >
+      </p-dropdown>
+      <!-- Quantidade do Produto -->
+      <input type="number" pInputText placeholder="Quantidade" formControlName="amount">
+
+      <div class="flex flex-row justify-content-center align-items-center align-content-center">
         <p-button
-          [disabled]="!editProductForm.valid"
+          [disabled]="!saleProductForm.valid"
           type="submit"
           label="Concluir"
         ></p-button>
       </div>
+
     </div>
+
   </form>
-</div> -->
+</div>

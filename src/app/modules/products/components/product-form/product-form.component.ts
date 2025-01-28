@@ -1,3 +1,4 @@
+import { response, Response } from 'express';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,6 +14,8 @@ import { ProductsServiceService } from 'src/app/services/products/products-servi
 import { ProductsDataTransferService } from 'src/app/shared/services/products-data-transfer.service';
 import { CreateProductRequest } from 'stock-api/src/models/interfaces/product/CreateProductRequest';
 import { EditProductRequest } from 'stock-api/src/models/interfaces/product/EditProductRequest';
+import { SaleProductRequest } from 'stock-api/src/models/interfaces/product/SaleProductRequest';
+import * as e from 'express';
 
 @Component({
   selector: 'app-product-form',
@@ -30,6 +33,7 @@ export class ProductFormComponent implements OnInit , OnDestroy {
   public productDatas: Array<GetAllProductsResponse> = [];
   public productSelectedDatas!: GetAllProductsResponse;
   public renderDropdown = false;
+  public saleProductSelected!: GetAllProductsResponse;
 
   public addProductAction = ProductEvent.ADD_PRODUCT_EVENT;
   public editProductAction = ProductEvent.EDIT_PRODUCT_EVENT;
@@ -55,6 +59,10 @@ export class ProductFormComponent implements OnInit , OnDestroy {
     category_id: ['', Validators.required]
   });
 
+  public saleProductForm = this.formBuilder.group({
+    amount: [0, Validators.required],
+    product_id: ['', Validators.required]
+  });
 
   constructor(
     private categoriesService: CategoriesService,
@@ -190,6 +198,44 @@ export class ProductFormComponent implements OnInit , OnDestroy {
     }
 
   }
+
+  handleSubmitSaleProduct(): void {
+    if(this.saleProductForm.value && this.saleProductForm.valid){
+      const requestDatas: SaleProductRequest = {
+        product_id: this.saleProductForm.value?.product_id as string,
+        amount: Number(this.saleProductForm.value.amount)
+      }
+      this.productService.saleProduct(requestDatas)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response: any) => {
+          if(response){
+            this.saleProductForm.reset();
+            this.getProductDatas(requestDatas.product_id);
+            this.router.navigate(['/products']);
+            this.messageService.add({
+              severity:'success',
+              summary: 'Sucesso',
+              detail: 'Produto vendido com sucesso',
+              life: 2000
+            });
+
+          }
+        },
+        error: (error: any) => {
+          console.error(error);
+          this.messageService.add({
+            severity:'error',
+            summary: 'Error',
+            detail: 'Erro ao vender produto',
+            life: 2000
+          });
+        }
+      });
+    }
+    this.saleProductForm.reset();
+  }
+
 
   getProductDatas(product_id: string): void {
     this.productService.getAllProducts()
