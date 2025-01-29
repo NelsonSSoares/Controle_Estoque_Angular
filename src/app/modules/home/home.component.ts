@@ -1,5 +1,5 @@
 
-import { Component, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ChartData } from 'chart.js';
@@ -16,7 +16,10 @@ import { UserService } from 'src/app/services/user/user-service.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnDestroy {
+export class HomeComponent implements OnDestroy, AfterViewInit {
+
+  @ViewChild('emailInput') emailInputRef!: ElementRef;
+  @ViewChild('passwordInput') passwordInputRef!: ElementRef;
 
   private destroy$: Subject<void> = new Subject<void>();
 
@@ -40,6 +43,18 @@ export class HomeComponent implements OnDestroy {
     private messageService: MessageService,
     private router: Router
   ) { }
+
+
+  ngAfterViewInit(): void {
+    console.log('emailInputRef', this.emailInputRef.nativeElement);
+    console.log('passwordInputRef', this.passwordInputRef.nativeElement);
+    this.emailInputRef.nativeElement.value = "Seu email aqui";
+    this.emailInputRef.nativeElement.focus();
+    this.passwordInputRef.nativeElement.value = "Sua senha aqui";
+    console.log('emailInputRef', this.emailInputRef.nativeElement.value);
+    console.log('passwordInputRef', this.passwordInputRef.nativeElement.value);
+  }
+
 
   onSubmitLoginForm(): void {
     if (this.loginForm.value && this.loginForm.valid) {

@@ -8,10 +8,18 @@
           *ngIf="loginCard"
         >
           <div class="flex justify-content-center align-content-center text-align-center">
-            <input type="email" pInputText placeholder="Email" formControlName="email">
+            <input
+              #emailInput
+              type="email"
+              pInputText placeholder="Email"
+              formControlName="email">
           </div>
           <div class=" mt-3 flex justify-content-center align-content-center text-align-center">
-            <input type="password" pInputText placeholder="Senha" formControlName="password">
+            <input
+              #passwordInput
+              type="password"
+              pInputText placeholder="Senha"
+              formControlName="password">
           </div>
 
           <div class="flex justify-content-center align-content-center text-align-center mt-3">
